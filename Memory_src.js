@@ -46,12 +46,12 @@ function vulSpeelveld(size) {
 	table.innerHTML = ''; // clear list
 
 	// Iterate through rows
-	for (let x = 0; x < size; x++) {
+	for (let y = 0; y < size; y++) {
 		let tableRow = document.createElement('tr');
 		table.appendChild(tableRow);
 
 		// Add cards in row
-		for (let y = 0; y < size; y++) {
+		for (let x = 0; x < size; x++) {
 			let tableData = document.createElement('td');
 			tableRow.appendChild(tableData);
 			tableData.innerHTML = "*";
