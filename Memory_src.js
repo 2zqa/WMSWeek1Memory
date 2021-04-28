@@ -43,6 +43,7 @@ function vulSpeelveld(size) {
 
 	// Get table
 	let table = document.getElementById("speelveld");
+	table.innerHTML = ''; // clear list
 
 	// Iterate through rows
 	for (let x = 0; x < size; x++) {
@@ -61,6 +62,16 @@ function vulSpeelveld(size) {
 
 function showScores(){
 	// Vul het topscore lijstje op het scherm.
+
+	let orderedList = document.getElementById("topscores");
+	orderedList.innerHTML = ''; // clear list
+	
+	for (const score of topScores) {
+		let scoreItem = document.createElement('li');
+		scoreItem.innerHTML = score.name + ": " + score.time;
+
+		orderedList.appendChild(scoreItem);
+	}
 }
 
 function setTijden(){
