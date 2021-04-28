@@ -8,7 +8,7 @@ var firstCard, secondCard;
 // De eerste en tweede kaart die zijn omgedraaid.
 var karakter;
 // Het teken dat op de achterkant van de kaart getoond wordt
-var intervalID,tijdID;
+var intervalID, tijdID;
 // De ID's voor de timeouts voor het terugdraaien van de kaarten en het bijwerken van de tijdweergave
 
 var numberOfCards;
@@ -16,21 +16,21 @@ var numberOfCards;
 var numberOfCardsLeft;
 // Aantal kaarten dat nog op het bord ligt
 var topScores = [
-                 {name:"Barack Obama", time:200},
-                 {name:"Bernie Sanders", time:300},
-                 {name:"Hillary Clinton", time:400},
-                 {name:"Jeb Bush", time:500},
-                 {name:"Donald Trump", time:600}
-                 ]
+	{ name: "Barack Obama", time: 200 },
+	{ name: "Bernie Sanders", time: 300 },
+	{ name: "Hillary Clinton", time: 400 },
+	{ name: "Jeb Bush", time: 500 },
+	{ name: "Donald Trump", time: 600 }
+]
 
 
-function initGame(size) { 
+function initGame(size) {
 	initVars(size);
 	vulSpeelveld(size);
 	showScores();
 }
 
-function initVars(size){
+function initVars(size) {
 	// Initialiseer alle benodigde variabelen en de velden op het scherm 
 	setTijden();
 }
@@ -51,7 +51,7 @@ function vulSpeelveld(size) {
 		table.appendChild(tableRow);
 
 		// Add cards in row
-		for(let y = 0; y < size; y++) {
+		for (let y = 0; y < size; y++) {
 			let tableData = document.createElement('td');
 			tableRow.appendChild(tableData);
 			tableData.innerHTML = "*";
@@ -60,12 +60,12 @@ function vulSpeelveld(size) {
 	}
 }
 
-function showScores(){
+function showScores() {
 	// Vul het topscore lijstje op het scherm.
 
 	let orderedList = document.getElementById("topscores");
 	orderedList.innerHTML = ''; // clear list
-	
+
 	for (const score of topScores) {
 		let scoreItem = document.createElement('li');
 		scoreItem.innerHTML = score.name + ": " + score.time;
@@ -74,53 +74,53 @@ function showScores(){
 	}
 }
 
-function setTijden(){
+function setTijden() {
 	// bereken de verlopen tijd, de gemiddlede tijd en het verschil tussen 
 	// de huidige speeltijd en de gemiddelde tijd en vul de elementen in de HTML.
 	// Vul ook het aantal gevonden kaarten
 }
 
-function getSeconds(){
+function getSeconds() {
 	// Een functie om de Systeemtijd in seconden in plaats van miliseconden 
 	// op te halen. Altijd handig.
 }
 
-var nextLetter = function(size){
-	var letterArray = "AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ".substring(0,size*size).split('');
-	var idx=0;
-	letterArray=shuffle(letterArray);
-	return function() {
-		var letter = letterArray[idx++]; 
+var nextLetter = function (size) {
+	var letterArray = "AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ".substring(0, size * size).split('');
+	var idx = 0;
+	letterArray = shuffle(letterArray);
+	return function () {
+		var letter = letterArray[idx++];
 		return letter;
 	}
-} 
+}
 
 function cardClicked(card) {
 	checkStarttijd();
 	checkDerdeKaart();
 	var draaiKaartOm = turnCard(card);
-	if (draaiKaartOm==2){
+	if (draaiKaartOm == 2) {
 		checkKaarten();
 	}
 }
 
-function checkStarttijd(){
+function checkStarttijd() {
 	// Controleer of de startijd van het spel gezet is, i.e. het spel al gestart was.
 	// Als dat niet zo is doe dat nu, en start de timeOut voor het bijhouden van de tijd.
 }
 
-function checkDerdeKaart(){
+function checkDerdeKaart() {
 	// Controleer of het de derde kaart is die wordt aangeklikt.
 	// Als dit zo is kunnen de geopende kaarten gedeactiveerd (gesloten) worden.
 }
 
-function turnCard(card){
+function turnCard(card) {
 	// Draai de kaart om. Dit kan alleen als de kaart nog niet geopend of gevonden is.
 	// Geef ook aan hoeveel kaarten er nu zijn omgedraaid en return dit zodat in de 
 	// cardClicked functie de checkKaarten functie kan worden aangeroepen als dat nodig is.
 }
 
-function deactivateCards() { 
+function deactivateCards() {
 	// Functie om de twee omgedraaide kaarten weer terug te draaien
 }
 
@@ -129,7 +129,7 @@ function toggleCard(element) {
 	// vice versa. switch dus van active naar inactive of omgekeerd.
 }
 
-function checkKaarten(){
+function checkKaarten() {
 	// Kijk of de beide kaarten gelijk zijn. Als dit zo is moet het aantal gevonden paren 
 	// opgehord worden, het aantal resterende kaarten kleiner worden en ervoor  
 	// gezorgd worden dat er niet meer op de kaarten geklikt kan worden. De kaarten
@@ -140,31 +140,31 @@ function checkKaarten(){
 
 // De functie tijdBijhouden moet elke halve seconde uitgevoerd worden om te controleren of 
 // het spel klaar is en de informatie op het scherm te verversen.
-function tijdBijhouden(){
-	if (numberOfCardsLeft==0) {
+function tijdBijhouden() {
+	if (numberOfCardsLeft == 0) {
 		endGame();
 	}
-	else{
+	else {
 		setTijden();
-	// Roep hier deze functie over 500 miliseconden opnieuw aan		
+		// Roep hier deze functie over 500 miliseconden opnieuw aan		
 	}
 }
 
-function endGame(){
+function endGame() {
 	// Bepaal de speeltijd, chekc topscores en doe de overige
 	// administratie.
 }
 
-function updateTopScores(speelTijd){
+function updateTopScores(speelTijd) {
 	// Voeg de aangeleverde speeltijd toe aal de lijst met topscores
 }
 
 // Deze functie ververst de kleuren van de kaarten van het type dat wordt meegegeven.
 function setColor(stylesheetId) {
-	var valueLocation = '#value'+stylesheetId.substring(3);
+	var valueLocation = '#value' + stylesheetId.substring(3);
 	var color = $(valueLocation).val();
-	$(stylesheetId).css('background-color', '#'+color );
-  }
+	$(stylesheetId).css('background-color', '#' + color);
+}
 
 // knuth array shuffle
 // from https://bost.ocks.org/mike/shuffle/ 
@@ -183,10 +183,10 @@ function shuffle(array) {
 	return array;
 }
 
-$(document).ready(function(){
-    $("#opnieuw").click(function(){
-        initGame($("#size").val());
-    });
+$(document).ready(function () {
+	$("#opnieuw").click(function () {
+		initGame($("#size").val());
+	});
 });
 
 
