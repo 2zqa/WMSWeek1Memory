@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 
 let board;
 
 var startTijd, totaalTijd = 0, aantalTijden = 0;
-// StartTijd is de tijd dat het huidige spel begonnen is. 
-// Totaaltijd is de som van de tijd van alle gespeelde spelletjes, aantaltijden is het aantal spelletjes 
+// StartTijd is de tijd dat het huidige spel begonnen is.
+// Totaaltijd is de som van de tijd van alle gespeelde spelletjes, aantaltijden is het aantal spelletjes
 var firstCard, secondCard;
 // De eerste en tweede kaart die zijn omgedraaid.
 var karakter;
@@ -34,7 +34,7 @@ function initGame(size) {
 }
 
 function initVars(size) {
-	// Initialiseer alle benodigde variabelen en de velden op het scherm 
+	// Initialiseer alle benodigde variabelen en de velden op het scherm
 	setCharacter();
 	setBoard(size);
 	setTijden();
@@ -95,13 +95,13 @@ function setBoard(size) {
 }
 
 function setTijden() {
-	// bereken de verlopen tijd, de gemiddlede tijd en het verschil tussen 
+	// bereken de verlopen tijd, de gemiddelde tijd en het verschil tussen
 	// de huidige speeltijd en de gemiddelde tijd en vul de elementen in de HTML.
 	// Vul ook het aantal gevonden kaarten
 }
 
 function getSeconds() {
-	// Een functie om de Systeemtijd in seconden in plaats van miliseconden 
+	// Een functie om de Systeemtijd in seconden in plaats van miliseconden
 	// op te halen. Altijd handig.
 }
 
@@ -136,7 +136,7 @@ function checkDerdeKaart() {
 
 function turnCard(card) {
 	// Draai de kaart om. Dit kan alleen als de kaart nog niet geopend of gevonden is.
-	// Geef ook aan hoeveel kaarten er nu zijn omgedraaid en return dit zodat in de 
+	// Geef ook aan hoeveel kaarten er nu zijn omgedraaid en return dit zodat in de
 	// cardClicked functie de checkKaarten functie kan worden aangeroepen als dat nodig is.
 }
 
@@ -145,20 +145,20 @@ function deactivateCards() {
 }
 
 function toggleCard(element) {
-	// Draai de kaart om, als de letter getoond wordt, toon dan de achterkant en 
+	// Draai de kaart om, als de letter getoond wordt, toon dan de achterkant en
 	// vice versa. switch dus van active naar inactive of omgekeerd.
 }
 
 function checkKaarten() {
-	// Kijk of de beide kaarten gelijk zijn. Als dit zo is moet het aantal gevonden paren 
-	// opgehord worden, het aantal resterende kaarten kleiner worden en ervoor  
+	// Kijk of de beide kaarten gelijk zijn. Als dit zo is moet het aantal gevonden paren
+	// opgehord worden, het aantal resterende kaarten kleiner worden en ervoor
 	// gezorgd worden dat er niet meer op de kaarten geklikt kan worden. De kaarten
 	// zijn nu found.
-	// Als de kaarten niet gelijk zijn moet de timer gaan lopen van de toontijd, en 
+	// Als de kaarten niet gelijk zijn moet de timer gaan lopen van de toontijd, en
 	// de timeleft geanimeerd worden zodat deze laat zien hoeveel tijd er nog is.
 }
 
-// De functie tijdBijhouden moet elke halve seconde uitgevoerd worden om te controleren of 
+// De functie tijdBijhouden moet elke halve seconde uitgevoerd worden om te controleren of
 // het spel klaar is en de informatie op het scherm te verversen.
 function tijdBijhouden() {
 	if (numberOfCardsLeft == 0) {
@@ -166,12 +166,12 @@ function tijdBijhouden() {
 	}
 	else {
 		setTijden();
-		// Roep hier deze functie over 500 miliseconden opnieuw aan		
+		// Roep hier deze functie over 500 miliseconden opnieuw aan
 	}
 }
 
 function endGame() {
-	// Bepaal de speeltijd, chekc topscores en doe de overige
+	// Bepaal de speeltijd, check topscores en doe de overige
 	// administratie.
 }
 
@@ -187,7 +187,7 @@ function setColor(stylesheetId) {
 }
 
 // knuth array shuffle
-// from https://bost.ocks.org/mike/shuffle/ 
+// from https://bost.ocks.org/mike/shuffle/
 function shuffle(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
 	// While there remain elements to shuffle...
@@ -208,5 +208,3 @@ $(document).ready(function () {
 		initGame($("#size").val());
 	});
 });
-
-
