@@ -35,8 +35,13 @@ function initGame(size) {
 
 function initVars(size) {
 	// Initialiseer alle benodigde variabelen en de velden op het scherm 
+	setCharacter();
 	setBoard(size);
 	setTijden();
+}
+
+function setCharacter() {
+	karakter = document.getElementById("character").value;
 }
 
 function vulSpeelveld(size) {
@@ -58,7 +63,7 @@ function vulSpeelveld(size) {
 		for (let x = 0; x < size; x++) {
 			let tableData = document.createElement('td');
 			tableRow.appendChild(tableData);
-			tableData.innerHTML = "*";
+			tableData.innerHTML = karakter;
 			tableData.className = "inactive";
 		}
 	}
