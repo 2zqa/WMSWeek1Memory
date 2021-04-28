@@ -1,6 +1,9 @@
 /**
  * 
  */
+
+let board;
+
 var startTijd, totaalTijd = 0, aantalTijden = 0;
 // StartTijd is de tijd dat het huidige spel begonnen is. 
 // Totaaltijd is de som van de tijd van alle gespeelde spelletjes, aantaltijden is het aantal spelletjes 
@@ -32,6 +35,7 @@ function initGame(size) {
 
 function initVars(size) {
 	// Initialiseer alle benodigde variabelen en de velden op het scherm 
+	setBoard(size);
 	setTijden();
 }
 
@@ -71,6 +75,17 @@ function showScores() {
 		scoreItem.innerHTML = score.name + ": " + score.time;
 
 		orderedList.appendChild(scoreItem);
+	}
+}
+
+function setBoard(size) {
+	board = [];
+	let nextLetterFunction = nextLetter(size);
+	for (let y = 0; y < size; y++) {
+		board[y] = [];
+		for (let x = 0; x < size; x++) {
+			board[y][x] = nextLetterFunction();
+		}
 	}
 }
 
