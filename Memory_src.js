@@ -1,10 +1,11 @@
-/**
- *
- */
-
+// Variable to hold internal representation of the board
 let board;
 
-var startTijd, totaalTijd = 0, aantalTijden = 0;
+// Array to store all times so far
+let tijden = [];
+let aantalTijden = tijden.length;
+
+let startTijd = 0;
 // StartTijd is de tijd dat het huidige spel begonnen is.
 // Totaaltijd is de som van de tijd van alle gespeelde spelletjes, aantaltijden is het aantal spelletjes
 var firstCard, secondCard;
@@ -42,6 +43,14 @@ function initVars(size) {
 
 function setCharacter() {
 	karakter = document.getElementById("character").value;
+}
+
+function getTotalTime() {
+	let totalTime = 0;
+	for (const tijd of tijden) {
+		totalTime += tijd;
+	}
+	return totalTime;
 }
 
 function vulSpeelveld(size) {
@@ -103,6 +112,7 @@ function setTijden() {
 function getSeconds() {
 	// Een functie om de Systeemtijd in seconden in plaats van miliseconden
 	// op te halen. Altijd handig.
+	return Math.floor(Date.now()/1000);
 }
 
 var nextLetter = function (size) {
