@@ -274,6 +274,9 @@ function tijdBijhouden() {
 }
 
 function endGame() {
+	gameStarted = false;
+	let speelTijd = getSeconds() - startTijd;
+	tijden.push(speelTijd);
 	updateTopScores(speelTijd);
 	// Bepaal de speeltijd, check topscores en doe de overige
 	// administratie.
@@ -281,12 +284,28 @@ function endGame() {
 
 function updateTopScores(speelTijd) {
 	if (speelTijd < topScores[topScores.length - 1].time) {
+
+		// Parse username
+		let username;
+		if (speelTijd < topScores[0].time) {
+			username = prompt("Gefeliciteerd, nieuwe highscore! Vul je naam in:");
+		} else {
+			username = prompt("Gefeliciteerd, top 5! Vul je naam in:");
+		}
+
+		if (username.trim().length === 0) {
+			username = "Anonymous";
+		}
+		
 		// Voeg de aangeleverde speeltijd toe aal de lijst met topscores
-		topScores.push({ name: prompt("Enter username"), time: speelTijd });
+		topScores.push({ name: username, time: speelTijd });
 		topScores.sort((a, b) => a.time - b.time);
 		topScores.pop();
 		showScores();
+	} else {
+		alert(`Helaas, geen nieuwe topscore. Jouw tijd: ${speelTijd}`);
 	}
+
 }
 
 // Deze functie ververst de kleuren van de kaarten van het type dat wordt meegegeven.
