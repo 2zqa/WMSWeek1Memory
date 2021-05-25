@@ -5,7 +5,6 @@ let id;
 
 // Array to store all times so far
 let tijden = [200, 300, 400, 500, 600];
-let aantalTijden = tijden.length;
 
 let timeoutVar;
 
@@ -43,6 +42,7 @@ function initGame(size) {
 
 function initVars(size) {
 	// Initialiseer alle benodigde variabelen en de velden op het scherm
+
 	setCharacter();
 	setBoard(size);
 	setTijden();
@@ -121,7 +121,7 @@ function setTijden() {
 		document.getElementById("tijd").innerHTML = time;
 		document.getElementById("gevonden").innerHTML = foundCardPairs;
 
-		let avgTime = getTotalTime() / aantalTijden;
+		let avgTime = Math.round(getTotalTime() / tijden.length);
 		let deltaTime = time - avgTime;
 		let deltaTimeFormatted = (deltaTime < 0 ? "" : "+") + deltaTime;
 
