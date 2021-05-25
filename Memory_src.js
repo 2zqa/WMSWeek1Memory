@@ -15,6 +15,7 @@ let startTijd = 0;
 // Totaaltijd is de som van de tijd van alle gespeelde spelletjes, aantaltijden is het aantal spelletjes
 let firstCard = null;
 let secondCard = null;
+let foundCardPairs = 0;
 // De eerste en tweede kaart die zijn omgedraaid.
 var karakter;
 // Het teken dat op de achterkant van de kaart getoond wordt
@@ -108,6 +109,7 @@ function setBoard(size) {
 			board[y][x] = nextLetterFunction();
 		}
 	}
+	foundCardPairs = 0;
 	numberOfCards = size**2;
 	numberOfCardsLeft = numberOfCards;
 }
@@ -117,7 +119,7 @@ function setTijden() {
 	if(gameStarted) {
 		let time = getSeconds() - startTijd;
 		document.getElementById("tijd").innerHTML = time;
-		document.getElementById("gevonden").innerHTML = openCards;
+		document.getElementById("gevonden").innerHTML = foundCardPairs;
 	
 		let avgTime = getTotalTime()/aantalTijden;
 		let deltaTime = time - avgTime;
@@ -160,9 +162,7 @@ function checkStarttijd() {
 	if(!gameStarted) {
 		gameStarted = true;
 		startTijd = getSeconds();
-		setTimeout(() => {
-			
-		}, 1000);
+		tijdBijhouden();
 	}
 	// Controleer of de startijd van het spel gezet is, i.e. het spel al gestart was.
 	// Als dat niet zo is doe dat nu, en start de timeOut voor het bijhouden van de tijd.
@@ -214,32 +214,16 @@ function openCard(card) {
 }
 
 function foundCards(card1, card2) {
+	card1.addEventListener("click", null);
+	card2.addEventListener("click", null);
 	card1.className = "found";
 	card2.className = "found";
 	firstCard = null;
 	secondCard = null;
 	numberOfCardsLeft -= 2;
-
-	card1.addEventListener("click", null);
-	card2.addEventListener("click", null);
+	openCards -= 2;
+	foundCardPairs++;
 }
-
-// function turnCard(card) {
-// 	// Draai de kaart om. Dit kan alleen als de kaart nog niet geopend of gevonden is.
-// 	// Geef ook aan hoeveel kaarten er nu zijn omgedraaid en return dit zodat in de
-// 	// cardClicked functie de checkKaarten functie kan worden aangeroepen als dat nodig is.
-// 	openCard(card);
-// 	return openCards;
-// }
-
-function deactivateCards() {
-	// Functie om de twee omgedraaide kaarten weer terug te draaien
-}
-
-// function toggleCard(element) {
-// 	// Draai de kaart om, als de letter getoond wordt, toon dan de achterkant en
-// 	// vice versa. switch dus van active naar inactive of omgekeerd.
-// }
 
 function checkKaarten() {
 	// Kijk of de beide kaarten gelijk zijn. Als dit zo is moet het aantal gevonden paren
@@ -290,12 +274,19 @@ function tijdBijhouden() {
 }
 
 function endGame() {
+	updateTopScores(speelTijd);
 	// Bepaal de speeltijd, check topscores en doe de overige
 	// administratie.
 }
 
 function updateTopScores(speelTijd) {
-	// Voeg de aangeleverde speeltijd toe aal de lijst met topscores
+	if(speelTijd < topScores[topScores.length-1].time) {
+		// Voeg de aangeleverde speeltijd toe aal de lijst met topscores
+		topScores.push({name: prompt("Enter username"), time: speelTijd});
+		topScores.sort((a,b) => a.time - b.time);
+		topScores.pop();
+		showScores();
+	}
 }
 
 // Deze functie ververst de kleuren van de kaarten van het type dat wordt meegegeven.
