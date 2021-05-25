@@ -4,7 +4,7 @@ let openCards = 0;
 let id;
 
 // Array to store all times so far
-let tijden = [];
+let tijden = [200, 300, 400, 500, 600];
 let aantalTijden = tijden.length;
 
 let timeoutVar;
