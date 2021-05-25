@@ -110,21 +110,21 @@ function setBoard(size) {
 		}
 	}
 	foundCardPairs = 0;
-	numberOfCards = size**2;
+	numberOfCards = size ** 2;
 	numberOfCardsLeft = numberOfCards;
 }
 
 // Better name: showStats()
 function setTijden() {
-	if(gameStarted) {
+	if (gameStarted) {
 		let time = getSeconds() - startTijd;
 		document.getElementById("tijd").innerHTML = time;
 		document.getElementById("gevonden").innerHTML = foundCardPairs;
-	
-		let avgTime = getTotalTime()/aantalTijden;
+
+		let avgTime = getTotalTime() / aantalTijden;
 		let deltaTime = time - avgTime;
-		let deltaTimeFormatted = (deltaTime<0?"":"+") + deltaTime;
-	
+		let deltaTimeFormatted = (deltaTime < 0 ? "" : "+") + deltaTime;
+
 		document.getElementById("gemiddeld").innerHTML = `${avgTime}s (${deltaTimeFormatted})`;
 	}
 	// bereken de verlopen tijd, de gemiddelde tijd en het verschil tussen
@@ -135,14 +135,14 @@ function setTijden() {
 function getSeconds() {
 	// Een functie om de Systeemtijd in seconden in plaats van miliseconden
 	// op te halen. Altijd handig.
-	return Math.floor(Date.now()/1000);
+	return Math.floor(Date.now() / 1000);
 }
 
-var nextLetter = function (size) {
+var nextLetter = function(size) {
 	var letterArray = "AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ".substring(0, size * size).split('');
 	var idx = 0;
 	letterArray = shuffle(letterArray);
-	return function () {
+	return function() {
 		var letter = letterArray[idx++];
 		return letter;
 	}
@@ -159,7 +159,7 @@ function cardClicked() {
 }
 
 function checkStarttijd() {
-	if(!gameStarted) {
+	if (!gameStarted) {
 		gameStarted = true;
 		startTijd = getSeconds();
 		tijdBijhouden();
@@ -169,7 +169,7 @@ function checkStarttijd() {
 }
 
 function checkDerdeKaart() {
-	if(firstCard !== null && secondCard !== null) {
+	if (firstCard !== null && secondCard !== null) {
 		// Both cards aren't null, therefore the third card has been clicked
 		closeCards();
 	}
@@ -189,12 +189,12 @@ function closeCards() {
 }
 
 function openCard(card) {
-	if(card === firstCard) {
+	if (card === firstCard) {
 		// mustn't click the same card twice
 		return openCards;
 	}
 	// Cards can be openened only when they are inactive
-	if(card.className !== "inactive") {
+	if (card.className !== "inactive") {
 		return openCards;
 	}
 	let x = card.cellIndex;
@@ -203,7 +203,7 @@ function openCard(card) {
 	card.innerHTML = board[y][x];
 
 	// Set firstCard and secondCard
-	if(firstCard === null) {
+	if (firstCard === null) {
 		firstCard = card;
 	} else if (secondCard === null) {
 		secondCard = card;
@@ -232,7 +232,7 @@ function checkKaarten() {
 	// zijn nu found.
 	// Als de kaarten niet gelijk zijn moet de timer gaan lopen van de toontijd, en
 	// de timeleft geanimeerd worden zodat deze laat zien hoeveel tijd er nog is.
-	if(firstCard.innerHTML === secondCard.innerHTML) {
+	if (firstCard.innerHTML === secondCard.innerHTML) {
 		foundCards(firstCard, secondCard);
 	} else {
 		startPeekTimer();
@@ -244,6 +244,7 @@ function startPeekTimer() {
 	let progress = 100;
 	let speed = 1; // Update-speed in ms. Must be an integer.
 	id = setInterval(frame, speed);
+
 	function frame() {
 		if (progress <= 0) {
 			elem.style.width = '100%';
@@ -266,8 +267,7 @@ function stopPeekTimer() {
 function tijdBijhouden() {
 	if (numberOfCardsLeft == 0) {
 		endGame();
-	}
-	else {
+	} else {
 		setTijden();
 		setTimeout(tijdBijhouden, 500);
 	}
@@ -280,10 +280,10 @@ function endGame() {
 }
 
 function updateTopScores(speelTijd) {
-	if(speelTijd < topScores[topScores.length-1].time) {
+	if (speelTijd < topScores[topScores.length - 1].time) {
 		// Voeg de aangeleverde speeltijd toe aal de lijst met topscores
-		topScores.push({name: prompt("Enter username"), time: speelTijd});
-		topScores.sort((a,b) => a.time - b.time);
+		topScores.push({ name: prompt("Enter username"), time: speelTijd });
+		topScores.sort((a, b) => a.time - b.time);
 		topScores.pop();
 		showScores();
 	}
@@ -299,7 +299,8 @@ function setColor(stylesheetId) {
 // knuth array shuffle
 // from https://bost.ocks.org/mike/shuffle/
 function shuffle(array) {
-	var currentIndex = array.length, temporaryValue, randomIndex;
+	var currentIndex = array.length,
+		temporaryValue, randomIndex;
 	// While there remain elements to shuffle...
 	while (0 !== currentIndex) {
 		// Pick a remaining element...
@@ -313,8 +314,8 @@ function shuffle(array) {
 	return array;
 }
 
-$(document).ready(function () {
-	$("#opnieuw").click(function () {
+$(document).ready(function() {
+	$("#opnieuw").click(function() {
 		initGame($("#size").val());
 	});
 });
